@@ -9,6 +9,23 @@ Welcome to the Gold Price Prediction Project! This repository contains a Python-
 - **Performance Evaluation**: Comprehensive metrics to assess model performance.
 - **Visualization Tools**: Graphical representations of predictions versus actual prices.
 
+## Table of Action Names and Scores
+The following table summarizes the performance scores of various trading actions implemented in this project:
+    <table>
+        <tr>
+          <th>Action Name</th>
+          <th>Score</th>
+        </tr>
+        <tr>
+          <td>NaviBase</td>
+          <td style="background-color: rgb(185, 185, 185);">51%</td>
+        </tr>
+        <tr>
+          <td>MACD</td>
+          <td style="background-color: rgb(185, 185, 185);">61%</td>
+        </tr>
+      </table>
+      
 ## Technologies Used
 - Python
 - Pandas, NumPy, Scikit-learn, TensorFlow/Keras, Matplotlib, Seaborn
