@@ -1,20 +1,18 @@
 from evaluations.evaluation import evaluation , true
 import pandas as pd
 
-data = pd.read_csv('evaluations/test_15min.csv')
-data["Date"] = pd.to_datetime(data['Date'])
-data.set_index('Date', inplace=True)
+def EMA():
+    data = pd.read_csv('evaluations/test_15min.csv')
+    data["Date"] = pd.to_datetime(data['Date'])
+    data.set_index('Date', inplace=True)
 
-data['EMA_12'] = data['Close'].ewm(span=7, adjust=False).mean()
-data['EMA_26'] = data['Close'].ewm(span=26, adjust=False).mean()
-data['signal'] = 0
+    data['EMA_12'] = data['Close'].ewm(span=7, adjust=False).mean()
+    data['EMA_26'] = data['Close'].ewm(span=26, adjust=False).mean()
+    data['signal'] = 0
 
-data.loc[data['EMA_12'] > data['EMA_26'], 'signal'] = 1
+    data.loc[data['EMA_12'] > data['EMA_26'], 'signal'] = 1
 
-ema_data = data[["signal"]]
+    ema_data = data[["signal"]]
 
-pred = evaluation(ema_data,"evaluations/test.csv")
-print(pred)
-
-print(pred / true)
-
+    pred = evaluation(ema_data,"evaluations/test.csv")
+    print(f"EMA prediction : {pred} Accuracy : {pred / true}")

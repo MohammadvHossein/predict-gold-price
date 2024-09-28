@@ -11,17 +11,17 @@ def generate_base_data(file, is_train):
 
     data["signal"] = np.where(data["Close"] >= data["Open"], 1, 0)
 
-    data = data[["Open", "Close",  "signal", "body"]]
+    # data = data[["Open", "Close",  "signal", "body"]]
     if is_train:
-        if os.path.exists("Train.csv"):
+        if os.path.exists("evaluations/Train.csv"):
             print("File Train.csv is exists.")
         else:
-            data.to_csv("Train.csv")
+            data.to_csv("evaluations/Train.csv")
     else:
-        if os.path.exists("test.csv"):
+        if os.path.exists("evaluations/test.csv"):
             print("File test.csv is exists.")
         else:
-            data.to_csv("test.csv")
+            data.to_csv("evaluations/test.csv")
 
 
 def evaluation(result, data, method="classification"):
@@ -37,10 +37,10 @@ def evaluation(result, data, method="classification"):
     else:
         print("Method is not avalible")
 
-# generate_base_data('test_15min.csv',is_train=False)
-# generate_base_data('test_15min.csv',is_train=True)
+# generate_base_data('evaluations/test_15min.csv',is_train=False)
+# generate_base_data('evaluations/test_15min.csv',is_train=True)
 
 
-train = pd.read_csv('evaluations/test.csv')
+train = pd.read_csv('evaluations/Train.csv')
 true = evaluation(train , 'evaluations/test.csv')
-print(true)
+print(f"Main : {true}")
