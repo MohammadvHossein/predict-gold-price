@@ -43,4 +43,4 @@ def evaluation(result, data, method="classification"):
 
 train = pd.read_csv('evaluations/test.csv')
 true = evaluation(train , 'evaluations/test.csv')
-print(true)
+print(f"Main : {true}")
