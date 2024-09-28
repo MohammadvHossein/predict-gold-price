@@ -1,5 +1,6 @@
-from evaluations.evaluation import evaluation , true
+from evaluations.evaluation import evaluation, true
 import pandas as pd
+
 
 def EMA():
     data = pd.read_csv('evaluations/test_15min.csv')
@@ -14,5 +15,6 @@ def EMA():
 
     ema_data = data[["signal"]]
 
-    pred = evaluation(ema_data,"evaluations/test.csv")
-    print(f"EMA prediction : {pred} Accuracy : {pred / true}")
+    pred = evaluation(ema_data, "evaluations/test.csv")
+
+    return str(round(pred, 1)), str(round(pred / true, 2))

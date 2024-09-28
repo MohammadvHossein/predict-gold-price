@@ -6,6 +6,7 @@ from EMA import EMA
 from ensemble import ensemble
 from MACD_and_SSL import MACD_SSL
 from MACD import MACD
+from SSL import SSL
 
 # print("naive_bayes :")
 # result = naive_bayes_classifier.classifier()
@@ -19,10 +20,18 @@ from MACD import MACD
 # result = Random_Forest_classifier.classifier()
 # print(evaluation.evaluation(result, data='evaluations/test.csv'), "\n")
 
-EMA()
+emaA , emaC = EMA()
 
-ensemble()
+ensembleA , ensembleC = ensemble()
 
-MACD_SSL()
+macd_sslA , macd_sslC = MACD_SSL()
 
-MACD()
+macdA , macdC = MACD()
+
+sslA , sslC = SSL()
+
+print("EMA : ".center(12), "|" , f"Accuracy : {emaA}".center(17) ,"|", f"Confidence : {emaC}".center(15))
+print("ensemble : ".center(12), "|" , f"Accuracy : {ensembleA}".center(17) ,"|", f"Confidence : {ensembleC}".center(15))
+print("MACD_SSL : ".center(12), "|" , f"Accuracy : {macd_sslA}".center(17) ,"|", f"Confidence : {macd_sslC}".center(15))
+print("MACD : ".center(12), "|" , f"Accuracy : {macdA}".center(17) ,"|", f"Confidence : {macdC}".center(15))
+print("SSL : ".center(12), "|" , f"Accuracy : {sslA}".center(17) ,"|", f"Confidence : {sslC}".center(15))

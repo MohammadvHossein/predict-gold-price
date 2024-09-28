@@ -1,5 +1,6 @@
-from evaluations.evaluation import evaluation , true
+from evaluations.evaluation import evaluation, true
 import pandas as pd
+
 
 def MACD():
     data = pd.read_csv('evaluations/test_15min.csv')
@@ -14,9 +15,8 @@ def MACD():
 
     data.loc[data['MACD'] > data['Signal_Line'], 'signal'] = 1
 
-    ema_data = data[["signal"]]
+    macd = data[["signal"]]
 
-    pred = evaluation(ema_data,"evaluations/test.csv")
+    pred = evaluation(macd, "evaluations/test.csv")
 
-    print(f"MACD prediction : {pred} Accuracy : {pred / true}")
-
+    return str(round(pred, 1)), str(round(pred / true, 2))
