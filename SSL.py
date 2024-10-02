@@ -1,8 +1,7 @@
 import pandas as pd
-from evaluations.evaluation import true
+from evaluations.evaluation import evaluation, true
 
-
-def MACD_SSL():
+def SSL():
     data = pd.read_csv('evaluations/Train.csv')
     data["Date"] = pd.to_datetime(data['Date'])
     data.set_index('Date', inplace=True)
@@ -36,30 +35,16 @@ def MACD_SSL():
     data['Exit_High'] = data['High'].rolling(window=len_exit).mean()
     data['Exit_Low'] = data['Low'].rolling(window=len_exit).mean()
 
-    data['signal_ssl'] = 0
+    data['signal'] = 0
 
     data.loc[data['Close'] > data[['SMA_High_SSL1', 'SMA_Low_SSL1']].max(
-        axis=1), 'signal_ssl'] = 1
+        axis=1), 'signal'] = 1
 
     data.loc[data['Close'] < data[['SMA_High_SSL1', 'SMA_Low_SSL1']].min(
-        axis=1), 'signal_ssl'] = 0
+        axis=1), 'signal'] = 0
 
-    data['EMA_12'] = data['Close'].ewm(span=12, adjust=False).mean()
-    data['EMA_26'] = data['Close'].ewm(span=26, adjust=False).mean()
-    data['MACD'] = data['EMA_12'] - data['EMA_26']
-    data['Signal_Line'] = data['MACD'].ewm(span=9, adjust=False).mean()
-    data['signal_MACD'] = 0
+    ssl = data[["signal"]]
 
-    data.loc[data['MACD'] > data['Signal_Line'], 'signal_MACD'] = 1
-
-    data[["signal_MACD"]]
-    data[['signal_ssl']]
-
-    new_data = data[["signal_MACD", "signal_ssl", "body"]]
-
-    pred = 0
-    for index, row in enumerate(new_data.values):
-        if row[0] == row[1]:
-            pred += row[2]
+    pred = evaluation(ssl, "evaluations/test.csv")
 
     return str(round(pred, 1)), str(round(pred / true, 2))

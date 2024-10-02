@@ -1,6 +1,7 @@
 from evaluations.evaluation import true
 import pandas as pd
 
+
 def ensemble():
     data = pd.read_csv('evaluations/Train.csv')
     data["Date"] = pd.to_datetime(data['Date'])
@@ -16,14 +17,13 @@ def ensemble():
 
     data['signalE'] = -1
 
-    data.loc[(data['EMA_5'] > data['EMA_10']) & (data['MACD'] > data['Signal_Line']), 'signalE'] = 1
-    data.loc[(data['EMA_5'] < data['EMA_10']) & (data['MACD'] < data['Signal_Line']), 'signalE'] = 0
+    data.loc[(data['EMA_5'] > data['EMA_10']) & (
+        data['MACD'] > data['Signal_Line']), 'signalE'] = 1
+    data.loc[(data['EMA_5'] < data['EMA_10']) & (
+        data['MACD'] < data['Signal_Line']), 'signalE'] = 0
 
-    ema_data = data[["signal","signalE","body"]]
+    ensemble = data[["signal", "signalE", "body"]]
 
-    new_data = ema_data[ema_data['signalE'] >= 0]
+    pred = ensemble[ensemble["signal"] == ensemble['signalE']]["body"].sum()
 
-    pred = ema_data[ema_data["signal"] == ema_data['signalE']]["body"].sum()
-    print(f"Ensemble prediction : {pred} Accuracy : {pred / true}")
-
-
+    return str(round(pred, 1)), str(round(pred / true, 2))
