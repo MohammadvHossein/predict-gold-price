@@ -1,7 +1,6 @@
 import pandas as pd
 from evaluations.evaluation import evaluation, true
 
-
 def SSL():
     data = pd.read_csv('evaluations/Train.csv')
     data["Date"] = pd.to_datetime(data['Date'])
