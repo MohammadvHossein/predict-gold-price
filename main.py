@@ -7,6 +7,7 @@ from ensemble import ensemble
 from MACD_and_SSL import MACD_SSL
 from MACD import MACD
 from SSL import SSL
+from custom import trading_signals
 
 # print("naive_bayes :")
 # result = naive_bayes_classifier.classifier()
@@ -29,9 +30,11 @@ macd_sslA , macd_sslC = MACD_SSL()
 macdA , macdC = MACD()
 
 sslA , sslC = SSL()
+mohA , mohC = trading_signals()
 
 print("EMA : ".center(12), "|" , f"Accuracy : {emaA}".center(17) ,"|", f"Confidence : {emaC}".center(15))
 print("ensemble : ".center(12), "|" , f"Accuracy : {ensembleA}".center(17) ,"|", f"Confidence : {ensembleC}".center(15))
 print("MACD_SSL : ".center(12), "|" , f"Accuracy : {macd_sslA}".center(17) ,"|", f"Confidence : {macd_sslC}".center(15))
 print("MACD : ".center(12), "|" , f"Accuracy : {macdA}".center(17) ,"|", f"Confidence : {macdC}".center(15))
 print("SSL : ".center(12), "|" , f"Accuracy : {sslA}".center(17) ,"|", f"Confidence : {sslC}".center(15))
+print("Custom : ".center(12), "|" , f"Accuracy : {mohA}".center(17) ,"|", f"Confidence : {mohC}".center(15))
